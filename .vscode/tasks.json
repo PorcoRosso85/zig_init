@@ -1,0 +1,41 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build zig test",
+            "type": "shell",
+            "command": "/Users/takasawa/Development/zig/.devbox/nix/profile/default/bin/zig",
+            "args": [
+                "test",
+                "-femit-bin=${workspaceFolder}/zig-out/bin/${fileBasenameNoExtension}test",
+                "${relativeFile}"
+            ],
+        },
+        {
+            "label": "build zig",
+            "type": "shell",
+            "command": "/Users/takasawa/Development/zig/.devbox/nix/profile/default/bin/zig",
+            "args": [
+                "build",
+                "--summary",
+                "all"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

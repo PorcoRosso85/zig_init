@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug test",
+            "type": "lldb",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/zig-out/bin/${fileBasenameNoExtension}test",
+            "args": [],
+            "preLaunchTask": "build zig test"
+        },
+        {
+            "name": "Debug",
+            "type": "lldb",
+            "request": "launch",
+            // FIXME:
+            "program": "${workspaceFolder}/zig-out/bin/${fileBasenameNoExtension}",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "build zig"
+        },
+    ]
+}
