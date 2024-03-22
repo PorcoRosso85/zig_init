@@ -1,3 +1,12 @@
 {
-    "zig.path": "/Users/takasawa/Development/zig/.devbox/nix/profile/default/bin/zig"
+    "zig.path": "${workspaceFolder}/../.devbox/nix/profile/default/bin/zig",
+    "zig.zls.path": "${workspaceFolder}/../.devbox/nix/profile/default/bin/zls",
+    "terminal.integrated.profiles.osx": {
+        "zsh": {
+            "path": "zsh",
+            "args": [
+                "-l"
+            ]
+        }
+    }
 }
