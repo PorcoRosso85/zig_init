@@ -2064,11 +2064,19 @@ Zig 標準ライブラリ (@import("std")) は, アーキテクチャ, 環境, �
 現在, Zig 標準ライブラリがサポートしているターゲットの一覧は以下の通りです. 
 Linux x86_64 Windows x86_64 macOS x86_64
 
-ビルドスクリプトを読んでみる
+## ビルドスクリプトを読んでみる
 https://zenn.dev/drumato/books/learn-zig-to-be-a-beginner/viewer/build#%E3%83%93%E3%83%AB%E3%83%89%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%92%E8%AA%AD%E3%82%93%E3%81%A7%E3%81%BF%E3%82%8B
 build.zigファイルはzig build 時に参照されるビルドスクリプトで, この機能のおかげで、ZigではMakefileを用意する必要がありません。
 主に、Cライブラリをリンクしたりする際に詳しく利用することになります。
 
+#### zig build で zig build test が呼ばれるようにする
+ビルドする前に、テストがすべて通ることを確認したい場合があると思います。
+その時にはbuild.zigを改変することで、ビルド時にzig build testが呼ばれるようにすることができます。
+このようにい変更することで、src/main.zigに、std.testing.expect(false); のようなテストブロックを追加してみると、zig build が失敗し、実行ファイルが生成されないことがわかります。
 
 大まかにビルドスクリプトからわかることは、zig build の挙動と、 zig build testのようなステップをそれぞれ定義して、ステップごとに記述する方式であることです。
 STEPとしては例えば、 exe.setBuildMode(mode); と、 exe_tests.setBuildMode(mode); で異なるビルドモードを指定することもできます。
+
+このビルドスクリプトを見ると、テスト対象として src/main.zig のみ追加されているように見えます。
+実際、 src/main.zig で src/a.zig の関数を呼んでいたとしても、 zig build test では src/a.zigで定義されたテストは実行されません。
+ここで、Zigでよく使われるテクニックを利用することで、src/main.zigが参照している他の定義をテスト対象に追加することができます。
